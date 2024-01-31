@@ -20,4 +20,10 @@ export class Juego extends Vista {
     mostrarResultado(mensaje) {
         this.resultado.textContent = mensaje;
     }
+
+    mostrarResultado(mensaje) {
+        
+        const resultadoDiv = document.getElementById('resultado');
+        resultadoDiv.textContent = mensaje;
+    }
 }

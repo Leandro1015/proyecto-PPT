@@ -4,8 +4,11 @@ import {Juego} from './views/vJuego.js'
 import {Inicio} from './views/vInicio.js'
 
 export class Controlador {
+
+    vistas = new Map()
+
     constructor() {
-        this.vistas = new Map()
+        
         this.modelo = new Modelo()
         this.inicializarVistas()
     }
@@ -14,47 +17,48 @@ export class Controlador {
         const divInicio = document.getElementById('divInicio')
 
         this.vistas.set(Vista.vInicio, new Inicio(this, divInicio))
-        this.vistas.set(Vista.vJuego, new Juego(this, divJuego))
+        //this.vistas.set(Vista.vJuego, new Juego(this, divJuego))
 
         this.verVista(Vista.vInicio)
     }
 
-      verVista (vista) {
+    verVista(vista) {
         this.ocultarVistas()
         this.vistas.get(vista).mostrar(true)
     }
 
-    ocultarVistas(){
-		for(const vista of this.vistas.values())
-			vista.mostrar(false)
-	}
+    ocultarVistas() {
+        for (const vista of this.vistas.values()) {
+            vista.mostrar(false)
+        }
+    }
 
     escoger(opcion) {
         const eleccionComputadora = ['piedra', 'papel', 'tijera'][Math.floor(Math.random() * 3)]
 
         if (opcion === eleccionComputadora) {
-            Vista.mostrarResultado('¡Es un empate!')
+            this.vistas.get(Vista.vJuego).mostrarResultado('¡Es un empate!')
         } else if (
             (opcion === 'piedra' && eleccionComputadora === 'tijera') ||
             (opcion === 'papel' && eleccionComputadora === 'piedra') ||
             (opcion === 'tijera' && eleccionComputadora === 'papel')
         ) {
             Juego.puntuacionUsuario++
-            Vista.mostrarResultado('¡Ganaste!')
+            this.vistas.get(Vista.vJuego).mostrarResultado('¡Ganaste!')
         } else {
             Juego.puntuacionComputadora++
-            Vista.mostrarResultado('¡Perdiste!')
+            this.vistas.get(Vista.vJuego).mostrarResultado('¡Perdiste!')
         }
 
-        Vista.actualizarVista()
+        this.vistas.get(Vista.vJuego).actualizarVista()
 
         if (Juego.puntuacionUsuario === 3 || Juego.puntuacionComputadora === 3) {
             window.alert(`Juego terminado. Puntuación final: Usuario ${Juego.puntuacionUsuario} - Computadora ${Juego.puntuacionComputadora}`)
-            Juego.reiniciar()
-            Vista.actualizarVista()
+            Modelo.reiniciar()
+            this.vistas.get(Vista.vJuego).actualizarVista()
         }
     }
     
 }
 
-const controlador = new Controlador()
+window.onload = () => {new Controlador()}

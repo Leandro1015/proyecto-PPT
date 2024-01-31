@@ -11,6 +11,6 @@ export class Inicio extends Vista {
   }
 
   pulsarEmpezar() {
-    this.controlador.verVista(Vista.vjuego)
+    this.controlador.verVista(Vista.vJuego)
   }
 }
