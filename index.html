@@ -10,19 +10,26 @@
     </head>
     <body>
         <h1>Piedra, papel o tijera</h1>
-        
+
         <div id="resultado"></div>
 
         <div id="puntuacion">Puntuación: Jugador 0 - Computadora 0</div>
 
-        <div class="opciones">
-            <button id="piedra">Piedra</button>
-            <button id="papel">Papel</button>
-            <button id="tijera">Tijera</button>
+        <div id="divInicio">
+            <button id="btnEmpezar">EMPEZAR</button>
         </div>
 
-        <script src="modelo.js"></script>
-        <script src="vista.js"></script>
-        <script src="controlador.js"></script>
+        <div id="divJuego">
+            <div class="opciones">
+                <button id="btnPiedra">Piedra</button>
+                <button id="btnPapel">Papel</button>
+                <button id="btnTijera">Tijera</button>
+            </div>
+        </div>
+
+        <script type="module" src="js/views/modelo.js"></script>
+        <script type="module" src="js/views/vista.js"></script>
+        <script type="module" src="js/controlador.js"></script>
+
     </body>
 </html>

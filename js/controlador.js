@@ -1,36 +1,33 @@
 import {Vista} from './views/vista.js'
+import {Modelo} from './views/modelo.js'
+import {Juego} from './views/vJuego.js'
+import {Inicio} from './views/vInicio.js'
 
-class Controlador {
+export class Controlador {
     constructor() {
         this.vistas = new Map()
+        this.modelo = new Modelo()
         this.inicializarVistas()
-
-        //referencia de la interfaz
-        const divInicio = document.getElementById('divInicio');
-        const divPiedra = document.getElementById('divPiedra');
-        const divPapel = document.getElementById('divPapel');
-        const divTijera = document.getElementById('divTijera');
     }
 
     inicializarVistas() {
-        this.vistas.set(Vista.vinicio, new Vista(this, document.getElementById('inicio')))
-        this.vistas.set(Vista.vpiedra, new Vista(this, document.getElementById('piedra')))
-        this.vistas.set(Vista.vpapel, new Vista(this, document.getElementById('papel')))
-        this.vistas.set(Vista.vtijera, new Vista(this, document.getElementById('tijera')))
+        const divInicio = document.getElementById('divInicio')
 
-        this.verVista(Vista.vinicio)
+        this.vistas.set(Vista.vInicio, new Inicio(this, divInicio))
+        this.vistas.set(Vista.vJuego, new Juego(this, divJuego))
+
+        this.verVista(Vista.vInicio)
     }
 
-    verVista(vista) {
+      verVista (vista) {
         this.ocultarVistas()
         this.vistas.get(vista).mostrar(true)
     }
 
-    ocultarVistas() {
-        for (const vista of this.vistas.values()) {
-            vista.mostrar(false)
-        }
-    }
+    ocultarVistas(){
+		for(const vista of this.vistas.values())
+			vista.mostrar(false)
+	}
 
     escoger(opcion) {
         const eleccionComputadora = ['piedra', 'papel', 'tijera'][Math.floor(Math.random() * 3)]
@@ -38,25 +35,26 @@ class Controlador {
         if (opcion === eleccionComputadora) {
             Vista.mostrarResultado('¡Es un empate!')
         } else if (
-            (opcion === Vista.piedra && eleccionComputadora === 'tijera') ||
-            (opcion === Vista.papel && eleccionComputadora === 'piedra') ||
-            (opcion === Vista.tijera && eleccionComputadora === 'papel')
+            (opcion === 'piedra' && eleccionComputadora === 'tijera') ||
+            (opcion === 'papel' && eleccionComputadora === 'piedra') ||
+            (opcion === 'tijera' && eleccionComputadora === 'papel')
         ) {
-            juego.puntuacionUsuario++;
+            Juego.puntuacionUsuario++
             Vista.mostrarResultado('¡Ganaste!')
         } else {
-            juego.puntuacionComputadora++;
+            Juego.puntuacionComputadora++
             Vista.mostrarResultado('¡Perdiste!')
         }
 
         Vista.actualizarVista()
 
-        if (juego.puntuacionUsuario === 3 || juego.puntuacionComputadora === 3) {
-            window.alert(`Juego terminado. Puntuación final: Usuario ${juego.puntuacionUsuario} - Computadora ${juego.puntuacionComputadora}`)
-            juego.reiniciar()
-            Vista.actualizarVista() // Actualiza la vista después de reiniciar
+        if (Juego.puntuacionUsuario === 3 || Juego.puntuacionComputadora === 3) {
+            window.alert(`Juego terminado. Puntuación final: Usuario ${Juego.puntuacionUsuario} - Computadora ${Juego.puntuacionComputadora}`)
+            Juego.reiniciar()
+            Vista.actualizarVista()
         }
     }
+    
 }
 
 const controlador = new Controlador()
