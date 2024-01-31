@@ -9,4 +9,5 @@ export class Modelo {
         this.puntuacionUsuario = 0
         this.puntuacionComputadora = 0
     }
+    
 }

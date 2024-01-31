@@ -3,21 +3,21 @@ import {Modelo} from './views/modelo.js'
 import {Juego} from './views/vJuego.js'
 import {Inicio} from './views/vInicio.js'
 
-export class Controlador {
+class Controlador {
 
     vistas = new Map()
 
     constructor() {
-        
         this.modelo = new Modelo()
         this.inicializarVistas()
     }
 
     inicializarVistas() {
         const divInicio = document.getElementById('divInicio')
+        const divJuego = document.getElementById('divJuego')
 
         this.vistas.set(Vista.vInicio, new Inicio(this, divInicio))
-        //this.vistas.set(Vista.vJuego, new Juego(this, divJuego))
+        this.vistas.set(Vista.vJuego, new Juego(this, divJuego))
 
         this.verVista(Vista.vInicio)
     }
@@ -36,29 +36,38 @@ export class Controlador {
     escoger(opcion) {
         const eleccionComputadora = ['piedra', 'papel', 'tijera'][Math.floor(Math.random() * 3)]
 
+        console.log(`Tu elección: ${opcion}`)
+        console.log(`Elección de la Computadora: ${eleccionComputadora}`)
+
         if (opcion === eleccionComputadora) {
+            console.log('¡Es un empate!')
             this.vistas.get(Vista.vJuego).mostrarResultado('¡Es un empate!')
         } else if (
             (opcion === 'piedra' && eleccionComputadora === 'tijera') ||
             (opcion === 'papel' && eleccionComputadora === 'piedra') ||
             (opcion === 'tijera' && eleccionComputadora === 'papel')
         ) {
-            Juego.puntuacionUsuario++
+            this.modelo.puntuacionUsuario++;
+            console.log('¡Ganaste!')
             this.vistas.get(Vista.vJuego).mostrarResultado('¡Ganaste!')
         } else {
-            Juego.puntuacionComputadora++
+            this.modelo.puntuacionComputadora++
+            console.log('¡Perdiste!')
             this.vistas.get(Vista.vJuego).mostrarResultado('¡Perdiste!')
         }
 
-        this.vistas.get(Vista.vJuego).actualizarVista()
+        console.log(`Puntuación: Jugador ${this.modelo.puntuacionUsuario} - Computadora ${this.modelo.puntuacionComputadora}`)
 
-        if (Juego.puntuacionUsuario === 3 || Juego.puntuacionComputadora === 3) {
-            window.alert(`Juego terminado. Puntuación final: Usuario ${Juego.puntuacionUsuario} - Computadora ${Juego.puntuacionComputadora}`)
-            Modelo.reiniciar()
+        this.vistas.get(Vista.vJuego).actualizarVista();
+
+        if (this.modelo.puntuacionUsuario === 3 || this.modelo.puntuacionComputadora === 3) {
+            window.alert(`Juego terminado. Puntuación final: Usuario ${this.modelo.puntuacionUsuario} - Computadora ${this.modelo.puntuacionComputadora}`)
+            this.modelo.reiniciar()
             this.vistas.get(Vista.vJuego).actualizarVista()
         }
-    }
-    
+    }  
 }
 
-window.onload = () => {new Controlador()}
+window.onload = () => {
+    new Controlador()
+}
