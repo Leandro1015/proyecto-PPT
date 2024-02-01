@@ -1,5 +1,4 @@
 import {Vista} from './vista.js'
-
 export class Inicio extends Vista {
 
   constructor(controlador, base) {

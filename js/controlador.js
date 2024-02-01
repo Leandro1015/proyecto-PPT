@@ -70,7 +70,8 @@ class Controlador {
     
         this.vistas.get(Vista.vJuego).actualizarVista()
     
-        if (this.modelo.puntuacionUsuario === 3 || this.modelo.puntuacionComputadora === 3) {
+        if (this.modelo.puntuacionUsuario === 3 || this.modelo.puntuacionComputadora === 3) 
+        {
             window.alert(`Juego terminado. Resultado: ${this.modelo.resultado} Puntuación final: Usuario ${this.modelo.puntuacionUsuario} - Computadora ${this.modelo.puntuacionComputadora}`)
             this.modelo.reiniciar()
             this.vistas.get(Vista.vJuego).actualizarVista()

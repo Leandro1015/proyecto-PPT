@@ -38,11 +38,15 @@ export class Juego extends Vista {
 
         // Oculta el div resultado a la hora de reiniciar el juego
         const resultadoDiv = document.getElementById('resultado')
-        if (resultadoDiv) {
-            if (this.controlador.modelo.resultado) {
-                resultadoDiv.style.display = 'block';
-            } else {
-                resultadoDiv.style.display = 'none';
+        if (resultadoDiv) 
+        {
+            if (this.controlador.modelo.resultado) 
+            {
+                resultadoDiv.style.display = 'block'
+            } 
+            else 
+            {
+                resultadoDiv.style.display = 'none'
             }
         }
     }    
