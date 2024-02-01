@@ -1,5 +1,4 @@
-import { Vista } from './vista.js'
-
+import {Vista} from './vista.js'
 export class Juego extends Vista {
     constructor(controlador, base) {
         super(controlador, base)
@@ -11,6 +10,9 @@ export class Juego extends Vista {
         this.btnPiedra.addEventListener('click', () => this.pulsarOpcion('piedra'))
         this.btnPapel.addEventListener('click', () => this.pulsarOpcion('papel'))
         this.btnTijera.addEventListener('click', () => this.pulsarOpcion('tijera'))
+
+        this.eleccionUsuarioDiv = document.getElementById('eleccionUsuario')
+        this.eleccionComputadoraDiv = document.getElementById('eleccionComputadora')
     }
 
     pulsarOpcion(opcion) {
@@ -19,21 +21,13 @@ export class Juego extends Vista {
 
     actualizarVista() {
         // Muestra la elección del jugador
-        const eleccionUsuarioDiv = document.getElementById('eleccionUsuario')
-        if (eleccionUsuarioDiv) {
-            eleccionUsuarioDiv.textContent = `Tu elección: ${this.controlador.modelo.eleccionUsuario || '-'}`
+        if (this.eleccionUsuarioDiv) {
+            this.eleccionUsuarioDiv.textContent = `Tu elección: ${this.controlador.modelo.eleccionUsuario}`
         }
     
         // Muestra la elección de la computadora
-        const eleccionComputadoraDiv = document.getElementById('eleccionComputadora');
-        if (eleccionComputadoraDiv) {
-            eleccionComputadoraDiv.textContent = `Elección de la Computadora: ${this.controlador.modelo.eleccionComputadora || '-'}`
-        }
-    
-        // Muestra el resultado del juego
-        const resultadoDiv = document.getElementById('resultado');
-        if (resultadoDiv) {
-            resultadoDiv.textContent = this.controlador.modelo.resultado || ''
+        if (this.eleccionComputadoraDiv) {
+            this.eleccionComputadoraDiv.textContent = `Elección de la Computadora: ${this.controlador.modelo.eleccionComputadora}`
         }
     
         // Actualiza la puntuación en la pantalla
@@ -41,7 +35,17 @@ export class Juego extends Vista {
         if (puntuacionDiv) {
             puntuacionDiv.textContent = `Puntuación: Jugador ${this.controlador.modelo.puntuacionUsuario} - Computadora ${this.controlador.modelo.puntuacionComputadora}`
         }
-    }
+
+        // Oculta el div resultado a la hora de reiniciar el juego
+        const resultadoDiv = document.getElementById('resultado')
+        if (resultadoDiv) {
+            if (this.controlador.modelo.resultado) {
+                resultadoDiv.style.display = 'block';
+            } else {
+                resultadoDiv.style.display = 'none';
+            }
+        }
+    }    
     
     mostrarResultado(mensaje) {
         const resultadoDiv = document.getElementById('resultado')

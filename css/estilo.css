@@ -1,0 +1,72 @@
+/*Leandro José Paniagua Balbuena*/
+
+body {
+    font-family: 'Verdana', sans-serif;
+    text-align: center;
+    margin: 50px;
+    background-color: #f9f9f9;
+}
+
+h1 {
+    color: #072233;
+}
+
+#resultado {
+    font-size: 24px;
+    margin-top: 20px;
+    color: #e74c3c;
+}
+
+#puntuacion {
+    color: #27ae60;
+    font-size: 18px;
+}
+
+#divInicio, #divJuego {
+    margin-top: 20px;
+}
+
+button {
+    font-size: 18px;
+    padding: 12px 24px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+#btnEmpezar {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.opciones {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.opciones button {
+    margin: 0 10px;
+}
+
+#btnPiedra {
+    background-color: #3498db;
+    color: white;
+}
+
+#btnPapel {
+    background-color: #2ecc71;
+    color: white;
+}
+
+#btnTijera {
+    background-color: #e67e22;
+    color: white;
+}
+
+button:hover {
+    background-color: #34495e;
+    color: #ecf0f1;
+}
+

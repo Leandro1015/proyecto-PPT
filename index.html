@@ -3,84 +3,26 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/estilo.css">
         <title>Piedra, papel o tijera</title>
-        <style>
-           body {
-                font-family: 'Verdana', sans-serif;
-                text-align: center;
-                margin: 50px;
-                background-color: #f7f7f7;
-            }
-
-            h1 {
-                color: #1c2a38;
-            }
-
-            #resultado {
-                font-size: 20px;
-                margin-top: 20px;
-                color: #3498db;
-            }
-
-            #puntuacion {
-                color: #27ae60;
-            }
-
-            #divInicio, #divJuego {
-                margin-top: 20px;
-            }
-
-            button {
-                font-size: 16px;
-                padding: 10px 20px;
-                cursor: pointer;
-                border: none;
-                border-radius: 5px;
-            }
-
-            #btnEmpezar {
-                background-color: #e74c3c;
-                color: white;
-            }
-
-            .opciones {
-                display: flex;
-                justify-content: center;
-                margin-top: 20px;
-            }
-
-            .opciones button {
-                margin: 0 10px;
-            }
-
-            #btnPiedra {
-                background-color: #3498db;
-                color: white;
-            }
-
-            #btnPapel {
-                background-color: #2ecc71;
-                color: white;
-            }
-
-            #btnTijera {
-                background-color: #e67e22;
-                color: white;
-            }
-        </style>
     </head>
     <body>
-        <h1>Piedra, papel o tijera</h1>
-
-        <div id="resultado"></div>
-
-        <div id="puntuacion">Puntuación: Jugador 0 - Computadora 0</div>
+        <h1>Piedra, Papel o Tijera</h1>
 
         <div id="divInicio">
             <button id="btnEmpezar">EMPEZAR</button>
         </div>
-
+        
         <div id="divJuego">
+            <div id="resultado"></div>
+
+            <div id="puntuacion">Puntuación: Jugador 0 - Computadora 0</div>
+
+            <div id="divRondas">
+                <p id="eleccionUsuario"></p>
+                <p id="eleccionComputadora"></p>
+            </div>
+
             <div class="opciones">
                 <button id="btnPiedra">Piedra</button>
                 <button id="btnPapel">Papel</button>
@@ -91,6 +33,5 @@
         <script type="module" src="js/views/modelo.js"></script>
         <script type="module" src="js/views/vista.js"></script>
         <script type="module" src="js/controlador.js"></script>
-
     </body>
 </html>
